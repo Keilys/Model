@@ -14,187 +14,122 @@ Object.prototype.bug = 42;
 
 module.exports = {
 
-    'DataEngine.prototype.decl': {
+    'DataEngine.prototype.decl': function (test) {
 
-        'declaration by decls object': function (test) {
+        var de;
+        var p0;
+        var p1;
+        var p2;
+        var p3;
+        var p4;
+        var result;
 
-            var de;
-            var p0;
-            var p1;
-            var p2;
-            var p3;
-            var p4;
-            var result;
+        de = new DataEngine();
+        p0 = function () {};
+        p1 = function () {};
+        p2 = function () {};
+        p3 = function () {};
+        p4 = function () {};
 
-            de = new DataEngine();
+        result = de.decl('myProvider0', p0);
 
-            p0 = function () {};
-            p1 = 'SOME_CONFIG';
-            p2 = function () {};
-            p3 = function () {};
-            p4 = function () {};
+        test.deepEqual(de.__decls__, {
+            myProvider0: {
+                deps: [],
+                prov: p0
+            }
+        });
 
-            result = de.decl({
-                myProvider0: p0,
-                myProvider1: p1,
-                myProvider2: {
-                    deps: ['myProvider1'],
-                    prov: p2
-                },
-                myProvider3: {
-                    prov: p3
-                },
-                myProvider4: {
-                    deps: 'myProvider1',
-                    prov: p4
-                }
-            });
+        test.ok( result instanceof DataEngine );
 
-            test.deepEqual( de.__decls__, {
-                myProvider0: {
-                    deps: [],
-                    prov: p0
-                },
-                myProvider1: {
-                    deps: [],
-                    prov: p1
-                },
-                myProvider2: {
-                    deps: ['myProvider1'],
-                    prov: p2
-                },
-                myProvider3: {
-                    deps: [],
-                    prov: p3
-                },
-                myProvider4: {
-                    deps: ['myProvider1'],
-                    prov: p4
-                }
-            });
+        result = de.decl('myProvider1', void 0, p1);
 
-            test.ok( result instanceof DataEngine );
+        test.deepEqual(de.__decls__, {
+            myProvider0: {
+                deps: [],
+                prov: p0
+            },
+            myProvider1: {
+                deps: [],
+                prov: p1
+            }
+        });
 
-            test.done();
-        },
+        test.ok( result instanceof DataEngine );
 
-        'declaration by separated arguments': function (test) {
+        result = de.decl('myProvider2', null, p2);
 
-            var de;
-            var p0;
-            var p1;
-            var p2;
-            var p3;
-            var p4;
-            var result;
+        test.deepEqual(de.__decls__, {
+            myProvider0: {
+                deps: [],
+                prov: p0
+            },
+            myProvider1: {
+                deps: [],
+                prov: p1
+            },
+            myProvider2: {
+                deps: [],
+                prov: p2
+            }
+        });
 
-            de = new DataEngine();
-            p0 = function () {};
-            p1 = function () {};
-            p2 = function () {};
-            p3 = function () {};
-            p4 = function () {};
+        test.ok( result instanceof DataEngine );
 
-            result = de.decl('myProvider0', p0);
+        result = de.decl('myProvider3', 'myProvider1', p3);
 
-            test.deepEqual(de.__decls__, {
-                myProvider0: {
-                    deps: [],
-                    prov: p0
-                }
-            });
+        test.deepEqual(de.__decls__, {
+            myProvider0: {
+                deps: [],
+                prov: p0
+            },
+            myProvider1: {
+                deps: [],
+                prov: p1
+            },
+            myProvider2: {
+                deps: [],
+                prov: p2
+            },
+            myProvider3: {
+                deps: ['myProvider1'],
+                prov: p3
+            }
+        });
 
-            test.ok( result instanceof DataEngine );
+        test.ok( result instanceof DataEngine );
 
-            result = de.decl('myProvider1', void 0, p1);
+        result = de.decl('myProvider4', [
+            'myProvider1',
+            'myProvider2'
+        ], p4);
 
-            test.deepEqual(de.__decls__, {
-                myProvider0: {
-                    deps: [],
-                    prov: p0
-                },
-                myProvider1: {
-                    deps: [],
-                    prov: p1
-                }
-            });
+        test.deepEqual(de.__decls__, {
+            myProvider0: {
+                deps: [],
+                prov: p0
+            },
+            myProvider1: {
+                deps: [],
+                prov: p1
+            },
+            myProvider2: {
+                deps: [],
+                prov: p2
+            },
+            myProvider3: {
+                deps: ['myProvider1'],
+                prov: p3
+            },
+            myProvider4: {
+                deps: ['myProvider1', 'myProvider2'],
+                prov: p4
+            }
+        });
 
-            test.ok( result instanceof DataEngine );
+        test.ok( result instanceof DataEngine );
 
-            result = de.decl('myProvider2', null, p2);
-
-            test.deepEqual(de.__decls__, {
-                myProvider0: {
-                    deps: [],
-                    prov: p0
-                },
-                myProvider1: {
-                    deps: [],
-                    prov: p1
-                },
-                myProvider2: {
-                    deps: [],
-                    prov: p2
-                }
-            });
-
-            test.ok( result instanceof DataEngine );
-
-            result = de.decl('myProvider3', 'myProvider1', p3);
-
-            test.deepEqual(de.__decls__, {
-                myProvider0: {
-                    deps: [],
-                    prov: p0
-                },
-                myProvider1: {
-                    deps: [],
-                    prov: p1
-                },
-                myProvider2: {
-                    deps: [],
-                    prov: p2
-                },
-                myProvider3: {
-                    deps: ['myProvider1'],
-                    prov: p3
-                }
-            });
-
-            test.ok( result instanceof DataEngine );
-
-            result = de.decl('myProvider4', [
-                'myProvider1',
-                'myProvider2'
-            ], p4);
-
-            test.deepEqual(de.__decls__, {
-                myProvider0: {
-                    deps: [],
-                    prov: p0
-                },
-                myProvider1: {
-                    deps: [],
-                    prov: p1
-                },
-                myProvider2: {
-                    deps: [],
-                    prov: p2
-                },
-                myProvider3: {
-                    deps: ['myProvider1'],
-                    prov: p3
-                },
-                myProvider4: {
-                    deps: ['myProvider1', 'myProvider2'],
-                    prov: p4
-                }
-            });
-
-            test.ok( result instanceof DataEngine );
-
-            test.done();
-        }
+        test.done();
     },
 
     'DataEngine.prototype.pull': {
@@ -226,8 +161,8 @@ module.exports = {
                 de.setEventEmitter({});
 
                 throw 0;
-            } catch (ex) {
 
+            } catch (ex) {
                 test.ok( ex instanceof TypeError );
             }
 
@@ -235,74 +170,61 @@ module.exports = {
 
             e1 = new Error();
 
-            de.decl({
-                url: function (result, errors) {
+            de.decl('url', function (result, errors) {
 
-                    test.deepEqual(result, {});
-                    test.deepEqual(errors, {});
+                test.deepEqual(result, {});
+                test.deepEqual(errors, {});
 
-                    return Url.parse('http://my-url.ru', true);
-                },
+                return Url.parse('http://my-url.ru', true);
+            });
 
-                error: {
-                    deps: ['url'],
-                    prov: function (result, errors) {
+            de.decl('error', ['url'], function (result, errors) {
 
-                        test.deepEqual(result, {
-                            url: Url.parse('http://my-url.ru', true)
-                        });
+                test.deepEqual(result, {
+                    url: Url.parse('http://my-url.ru', true)
+                });
 
-                        test.deepEqual(errors, {});
+                test.deepEqual(errors, {});
 
-                        throw e1;
-                    }
-                },
-                host: {
-                    deps: ['error', 'url.tld', 'url'],
-                    prov: function (result, errors) {
+                throw e1;
+            });
 
-                        var url;
+            de.decl('host', [
+                'error',
+                'url.tld',
+                'url'
+            ], function (result, errors) {
 
-                        url = Url.parse('http://my-url.ru', true);
-                        url.tld = 'ru';
+                var url;
 
-                        test.deepEqual(result, {
-                            url: url
-                        });
+                url = Url.parse('http://my-url.ru', true);
+                url.tld = 'ru';
 
-                        test.strictEqual(errors.error, e1);
+                test.deepEqual(result, {
+                    url: url
+                });
 
-                        return result.url.hostname;
-                    }
-                },
+                test.strictEqual(errors.error, e1);
 
-                'url.tld': {
-                    deps: ['url'],
-                    prov: function (result, errors) {
+                return result.url.hostname;
+            });
 
-                        test.deepEqual(result, {
-                            url: Url.parse('http://my-url.ru', true)
-                        });
+            de.decl('url.tld', ['url'], function (result, errors) {
 
-                        test.deepEqual(errors, {});
+                test.deepEqual(result, {
+                    url: Url.parse('http://my-url.ru', true)
+                });
 
-                        return result.url.hostname.split('.').pop();
-                    }
-                },
+                test.deepEqual(errors, {});
 
-                conf: {
-                    prov: 'JUST STRING'
-                },
+                return result.url.hostname.split('.').pop();
+            });
 
-                'ns.x': {
-                    prov: 'x'
-                },
+            de.decl('conf', 'JUST STRING');
 
-                'ns': {
-                    prov: {
-                        z: 'z'
-                    }
-                }
+            de.decl('ns.x', 'x');
+            de.decl('ns', {
+                z: 'z'
             });
 
             de.pull(['host', 'nonex', 'conf', 'ns.x', 'ns'],
@@ -340,27 +262,18 @@ module.exports = {
 
             de.setEventEmitter(ee);
 
-            de.decl({
+            de.decl('ex', function () {
+                throw new Exception();
+            });
 
-                'ex': function () {
-                    throw new Exception();
-                },
+            de.decl('dep', ['ex'], function () {
+                //  Should not be called
+                test.ok(false);
+            });
 
-                'dep': {
-                    deps: ['ex'],
-                    prov: function () {
-                        //  Should not be called
-                        test.ok(false);
-                    }
-                },
-
-                'myData': {
-                    deps: ['dep'],
-                    prov: function () {
-                        //  Should not be called
-                        test.ok(false);
-                    }
-                }
+            de.decl('myData', ['dep'], function () {
+                //  Should not be called
+                test.ok(false);
             });
 
             de.pull('myData', function (ex, result, errors) {
@@ -371,7 +284,6 @@ module.exports = {
                 test.done();
 
             });
-
         }
     }
 };
