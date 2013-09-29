@@ -1,20 +1,20 @@
 'use strict';
 
-var Ee;
-var Ex;
-var De;
+var EventEmitter;
+var Exception;
+var DataEngine;
 var Url;
 
-Ee = require('../lib/EventEmitter');
-Ex = require('../Exception');
-De = require('../');
+EventEmitter = require('../lib/EventEmitter');
+Exception = require('../Exception');
+DataEngine = require('../');
 Url = require('url');
 
 Object.prototype.bug = 42;
 
 module.exports = {
 
-    'De.prototype.decl': {
+    'DataEngine.prototype.decl': {
 
         'declaration by decls object': function (test) {
 
@@ -26,7 +26,7 @@ module.exports = {
             var p4;
             var result;
 
-            de = new De();
+            de = new DataEngine();
 
             p0 = function () {};
             p1 = 'SOME_CONFIG';
@@ -73,7 +73,7 @@ module.exports = {
                 }
             });
 
-            test.ok( result instanceof De );
+            test.ok( result instanceof DataEngine );
 
             test.done();
         },
@@ -88,7 +88,7 @@ module.exports = {
             var p4;
             var result;
 
-            de = new De();
+            de = new DataEngine();
             p0 = function () {};
             p1 = function () {};
             p2 = function () {};
@@ -104,7 +104,7 @@ module.exports = {
                 }
             });
 
-            test.ok( result instanceof De );
+            test.ok( result instanceof DataEngine );
 
             result = de.decl('myProvider1', void 0, p1);
 
@@ -119,7 +119,7 @@ module.exports = {
                 }
             });
 
-            test.ok( result instanceof De );
+            test.ok( result instanceof DataEngine );
 
             result = de.decl('myProvider2', null, p2);
 
@@ -138,7 +138,7 @@ module.exports = {
                 }
             });
 
-            test.ok( result instanceof De );
+            test.ok( result instanceof DataEngine );
 
             result = de.decl('myProvider3', 'myProvider1', p3);
 
@@ -161,7 +161,7 @@ module.exports = {
                 }
             });
 
-            test.ok( result instanceof De );
+            test.ok( result instanceof DataEngine );
 
             result = de.decl('myProvider4', [
                 'myProvider1',
@@ -191,13 +191,13 @@ module.exports = {
                 }
             });
 
-            test.ok( result instanceof De );
+            test.ok( result instanceof DataEngine );
 
             test.done();
         }
     },
 
-    'De.prototype.pull': {
+    'DataEngine.prototype.pull': {
         'accepting': function (test) {
 
             var ctx;
@@ -205,13 +205,13 @@ module.exports = {
             var e1;
             var ee;
 
-            ee = new Ee();
+            ee = new EventEmitter();
 
-//            ee.on(De.events.DATA_ACCEPTED, function (id) {
+//            ee.on(DataEngine.events.DATA_ACCEPTED, function (id) {
 //                console.log('OK:', id);
 //            });
 //
-//            ee.on(De.events.DATA_REJECTED, function (id) {
+//            ee.on(DataEngine.events.DATA_REJECTED, function (id) {
 //                console.log('ERROR:', id);
 //            });
 
@@ -219,7 +219,7 @@ module.exports = {
                 z: 5
             };
 
-            de = new De();
+            de = new DataEngine();
 
 
             try {
@@ -231,7 +231,7 @@ module.exports = {
                 test.ok( ex instanceof TypeError );
             }
 
-            de.setEventEmitter(/** @type {EventEmitter} */ ee);
+            de.setEventEmitter(ee);
 
             e1 = new Error();
 
@@ -330,20 +330,20 @@ module.exports = {
             var de;
             var ee;
 
-            ee = new Ee();
+            ee = new EventEmitter();
 
-//            ee.on(De.events.DATA_REJECTED, function (id) {
+//            ee.on(DataEngine.events.DATA_REJECTED, function (id) {
 //                console.log('ERROR:', id);
 //            });
 
-            de = new De();
+            de = new DataEngine();
 
-            de.setEventEmitter(/** @type {EventEmitter} */ ee);
+            de.setEventEmitter(ee);
 
             de.decl({
 
                 'ex': function () {
-                    throw new Ex();
+                    throw new Exception();
                 },
 
                 'dep': {
@@ -365,7 +365,7 @@ module.exports = {
 
             de.pull('myData', function (ex, result, errors) {
 
-                test.ok(ex instanceof  Ex);
+                test.ok(ex instanceof  Exception);
                 test.strictEqual(result, null);
                 test.strictEqual(errors, null);
                 test.done();

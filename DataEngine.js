@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./lib/Model');
+module.exports = require('./lib/DataEngine');
