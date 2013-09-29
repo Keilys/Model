@@ -50,7 +50,7 @@ module.exports = {
                 }
             });
 
-            test.deepEqual( de.__provs__, {
+            test.deepEqual( de.__decls__, {
                 myProvider0: {
                     deps: [],
                     prov: p0
@@ -97,7 +97,7 @@ module.exports = {
 
             result = de.decl('myProvider0', p0);
 
-            test.deepEqual(de.__provs__, {
+            test.deepEqual(de.__decls__, {
                 myProvider0: {
                     deps: [],
                     prov: p0
@@ -108,7 +108,7 @@ module.exports = {
 
             result = de.decl('myProvider1', void 0, p1);
 
-            test.deepEqual(de.__provs__, {
+            test.deepEqual(de.__decls__, {
                 myProvider0: {
                     deps: [],
                     prov: p0
@@ -123,7 +123,7 @@ module.exports = {
 
             result = de.decl('myProvider2', null, p2);
 
-            test.deepEqual(de.__provs__, {
+            test.deepEqual(de.__decls__, {
                 myProvider0: {
                     deps: [],
                     prov: p0
@@ -142,7 +142,7 @@ module.exports = {
 
             result = de.decl('myProvider3', 'myProvider1', p3);
 
-            test.deepEqual(de.__provs__, {
+            test.deepEqual(de.__decls__, {
                 myProvider0: {
                     deps: [],
                     prov: p0
@@ -168,7 +168,7 @@ module.exports = {
                 'myProvider2'
             ], p4);
 
-            test.deepEqual(de.__provs__, {
+            test.deepEqual(de.__decls__, {
                 myProvider0: {
                     deps: [],
                     prov: p0
