@@ -1,0 +1,37 @@
+{
+    "author": {
+        "name": "Golyshev Dmitrii",
+        "email": "golyshev.dmitry@yandex.ru"
+    },
+    "bugs": {
+        "url": "https://github.com/golyshevd/Model/issues"
+    },
+    "contributors": [
+        {
+            "name": "Golyshev Dmitrii",
+            "email": "golyshev.dmitry@yandex.ru"
+        }
+    ],
+    "dependencies": {
+        "jspromise": "~0.1.10",
+        "node-ns": "~1.0.0"
+    },
+    "description": "Simple asynchronous promise-based controller",
+    "devDependencies": {
+        "jshint": "",
+        "nodeunit": "",
+        "istanbul": ""
+    },
+    "license": "MIT",
+    "main": "lib/Model",
+    "name": "con",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/golyshevd/Model.git"
+    },
+    "scripts": {
+        "test": "./node_modules/.bin/istanbul test ./test/utils/runner.js"
+    },
+    "version": "0.0.1",
+    "readme": "de\n==========\n\nSimple asynchronous promise based data engine\n"
+}
