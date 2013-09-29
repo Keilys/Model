@@ -6,7 +6,7 @@ var De;
 var Url;
 
 Ee = require('../lib/EventEmitter');
-Ex = require('../lib/Exception');
+Ex = require('../Exception');
 De = require('../');
 Url = require('url');
 

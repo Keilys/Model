@@ -23,8 +23,8 @@
         "istanbul": ""
     },
     "license": "MIT",
-    "main": "lib/Model",
-    "name": "con",
+    "main": "DataEngine",
+    "name": "de",
     "repository": {
         "type": "git",
         "url": "git://github.com/golyshevd/Model.git"
