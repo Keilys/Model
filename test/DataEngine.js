@@ -285,5 +285,37 @@ module.exports = {
 
             });
         }
+    },
+
+    'DataEngine.prototype.alias': function (test) {
+
+        var de;
+
+        de = new DataEngine();
+
+        de.decl('my-pv-0', function () {
+            return {
+                myVal: 42
+            };
+        });
+
+        de.decl('xxx', {
+            superVal: 100500
+        });
+
+        de.alias('my-pv-0', 'xxx');
+
+        de.pull(['my-pv-0', 'xxx'], function (ex, result) {
+
+            test.deepEqual(result, {
+                xxx: {
+                    myVal: 42,
+                    superVal: 100500
+                }
+            });
+
+            test.done();
+        });
+
     }
 };
