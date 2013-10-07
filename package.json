@@ -13,7 +13,7 @@
         }
     ],
     "dependencies": {
-        "jspromise": "~0.1.10",
+        "jspromise": "~0.2.2",
         "node-ns": "~1.0.0"
     },
     "description": "Simple asynchronous promise-based controller",
