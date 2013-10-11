@@ -263,7 +263,7 @@ module.exports = {
             de.setEventEmitter(ee);
 
             de.decl('ex', function () {
-                throw new Exception();
+                throw new Exception('reject that!!!');
             });
 
             de.decl('dep', ['ex'], function () {
@@ -279,10 +279,10 @@ module.exports = {
             de.pull('myData', function (ex, result, errors) {
 
                 test.ok(ex instanceof  Exception);
+                test.strictEqual(ex.message, 'reject that!!!');
                 test.strictEqual(result, null);
                 test.strictEqual(errors, null);
                 test.done();
-
             });
         }
     },
