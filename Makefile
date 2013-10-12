@@ -2,9 +2,6 @@
 
 .DEFAULT_GOAL := all
 NODE_MODULES := node_modules/
-BIN := $(NODE_MODULES).bin/
-JSHINT := $(BIN)jshint
-ISTANBUL := $(BIN)istanbul
 
 all:: hook
 all:: lint
@@ -12,21 +9,20 @@ all:: cov
 all:: readme
 
 cov: $(NODE_MODULES)
-	$(ISTANBUL) cover test/utils/runner.js
+	./tools/cover
 
 hook: .git/hooks/pre-commit
 .git/hooks/pre-commit: pre-commit
 	cp $< $@
 
 lint: $(NODE_MODULES)
-	$(JSHINT) lib/
-	$(JSHINT) test/
+	./tools/lint
 
 readme:
-	./tools/upd-readme.js
+	./tools/readme
 
 test: $(NODE_MODULES)
-	$(ISTANBUL) test test/utils/runner.js
+	./tools/test
 
 $(NODE_MODULES):
 	npm install

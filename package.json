@@ -30,7 +30,7 @@
         "url": "git://github.com/golyshevd/Model.git"
     },
     "scripts": {
-        "test": "./node_modules/.bin/istanbul test ./test/utils/runner.js"
+        "test": "./tools/test"
     },
     "version": "0.1.3",
     "readme": "de [![Build Status](https://travis-ci.org/golyshevd/Model.png?branch=master)](https://travis-ci.org/golyshevd/Model)\n==========\n\nSimple asynchronous promise based data engine\n"

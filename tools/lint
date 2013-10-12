@@ -1,0 +1,3 @@
+#!/bin/sh
+./node_modules/.bin/jshint ./lib/
+./node_modules/.bin/jshint ./test/
