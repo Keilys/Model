@@ -13,9 +13,9 @@ var Exception;
 var Namespace;
 var Promise;
 
-EventEmitter = /** @type EventEmitter */ require('./EventEmitter');
+EventEmitter = /** @type EventEmitter */ require('../lib/EventEmitter');
 Exception = /** @type Exception */ require('./Exception');
-Namespace = /** @type Namespace */ require('./Namespace');
+Namespace = /** @type Namespace */ require('../lib/Namespace');
 Promise = require('../util/promise');
 
 /**
