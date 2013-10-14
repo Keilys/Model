@@ -6,10 +6,10 @@ var DataEngine;
 var JSPromise;
 var Url;
 
-EventEmitter = require('../lib/EventEmitter');
+EventEmitter = require('../src/lib/EventEmitter');
 Exception = require('../Exception');
 DataEngine = require('../');
-JSPromise = require('../lib/JSPromise');
+JSPromise = require('../src/lib/JSPromise');
 Url = require('url');
 
 Object.prototype.bug = 42;
