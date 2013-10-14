@@ -104,22 +104,38 @@ DataEngine.prototype = {
      * @method
      *
      * @param {Array<String>|String} provs
-     * @param {Function} fn
+     * @param {*} fn
      * @param {*} [ctx]
      *
-     * @returns {void}
+     * @returns {void|JSPromise}
      * */
     pull: function (provs, fn, ctx) {
+
+        var helper;
 
         if ( !Array.isArray(provs) ) {
             provs = [provs];
         }
 
-        this.__pull__(provs, ctx, {}).then(function (value) {
+        if ( 'function' !== typeof fn ) {
+
+            if ( 3 > arguments.length ) {
+
+                return this.__pull__(provs, fn, {});
+            }
+
+            helper = ctx;
+            ctx = fn;
+            fn = helper;
+        }
+
+        this.__pull__(provs, ctx, {}).done(function (value) {
             fn.call(ctx, null, value.result, value.errors);
         }, function (reason) {
             fn.call(ctx, reason, null, null);
-        }).done();
+        });
+
+        return void 0;
     },
 
     /**

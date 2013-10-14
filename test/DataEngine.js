@@ -3,11 +3,13 @@
 var EventEmitter;
 var Exception;
 var DataEngine;
+var JSPromise;
 var Url;
 
 EventEmitter = require('../lib/EventEmitter');
 Exception = require('../Exception');
 DataEngine = require('../');
+JSPromise = require('../lib/JSPromise');
 Url = require('url');
 
 Object.prototype.bug = 42;
@@ -317,5 +319,80 @@ module.exports = {
             test.done();
         });
 
+    },
+
+    'Callback exception': function (test) {
+        var de;
+
+        de = new DataEngine();
+
+        de.pull([], function () {
+
+            throw 0;
+        });
+
+        process.once('uncaughtException', function (ex) {
+            test.strictEqual(ex, 0);
+            test.done();
+        });
+    },
+
+    'Pull method polymorphism': {
+
+        'test (1)': function (test) {
+
+            var ctx;
+            var de;
+
+            ctx = {};
+
+            de = new DataEngine();
+
+            test.strictEqual(de.pull([], function fn () {
+                test.strictEqual(this, ctx);
+                test.done();
+            }, ctx), void 0);
+        },
+
+        'test (2)': function (test) {
+
+            var ctx;
+            var de;
+
+            ctx = {};
+
+            de = new DataEngine();
+
+            test.strictEqual(de.pull([], ctx, function fn () {
+                test.strictEqual(this, ctx);
+                test.done();
+            }), void 0);
+        },
+
+        'test (3)': function (test) {
+
+            var ctx;
+            var de;
+            var res;
+
+            ctx = {};
+
+            de = new DataEngine();
+
+            res = de.pull([], ctx);
+
+            res.then(function (value) {
+                test.deepEqual(value, {
+                    result: {},
+                    errors: {}
+                });
+
+                test.done();
+            });
+
+            test.ok( res instanceof JSPromise );
+        }
+
     }
+
 };

@@ -27,4 +27,4 @@ test: $(NODE_MODULES)
 $(NODE_MODULES):
 	npm install
 
-.PHONY: $(NODE_MODULES) all cov lint test
+.PHONY: $(NODE_MODULES) all cov hook lint test
