@@ -1,2 +1,2 @@
 #!/bin/sh
-./node_modules/.bin/istanbul cover test/utils/runner.js
+./tools/istanbul cover tools/test

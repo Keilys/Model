@@ -1,2 +1,24 @@
-#!/bin/sh
-./node_modules/.bin/istanbul test test/utils/runner.js
+#!/usr/bin/env node
+'use strict';
+
+var Fs;
+var Nodeunit;
+var Path;
+var tests;
+
+Fs = require('fs');
+Path = require('path');
+Nodeunit = require('nodeunit');
+tests = Fs.readdirSync('test');
+
+tests = tests.filter(function (fileName) {
+
+    return Fs.statSync( Path.join('test', fileName) ).isFile();
+}).map(function (fileName) {
+
+        return Path.join('test', fileName);
+    });
+
+Nodeunit.reporters.default.run(tests, null, function (error) {
+    process.exit( +!!error );
+});
