@@ -1,29 +1,28 @@
 #!/usr/bin/make
 
 .DEFAULT_GOAL := all
-NODE_MODULES := node_modules/
 
-all:: hook
+all:: hooks
 all:: lint
 all:: cov
 all:: readme
 
-cov: $(NODE_MODULES)
+cov: modules
 	./tools/cover
 
 hooks:
 	./tools/init-githooks
 
-lint: $(NODE_MODULES)
+lint: modules
 	./tools/lint
+
+modules:
+	npm install
 
 readme:
 	./tools/readme
 
-test: $(NODE_MODULES)
+test: modules
 	./tools/test
 
-$(NODE_MODULES):
-	npm install
-
-.PHONY: $(NODE_MODULES) all cov hooks lint test
+.PHONY: modules all cov hooks lint test
