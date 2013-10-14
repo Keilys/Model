@@ -11,9 +11,8 @@ all:: readme
 cov: $(NODE_MODULES)
 	./tools/cover
 
-hook: .git/hooks/pre-commit
-.git/hooks/pre-commit: pre-commit
-	cp $< $@
+hooks:
+	./tools/init-githooks
 
 lint: $(NODE_MODULES)
 	./tools/lint
@@ -27,4 +26,4 @@ test: $(NODE_MODULES)
 $(NODE_MODULES):
 	npm install
 
-.PHONY: $(NODE_MODULES) all cov hook lint test
+.PHONY: $(NODE_MODULES) all cov hooks lint test
