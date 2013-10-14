@@ -4,10 +4,10 @@
 
 all:: hooks
 all:: lint
-all:: cov
+all:: cover
 all:: readme
 
-cov: modules
+cover: modules
 	./tools/cover
 
 hooks:
@@ -25,4 +25,4 @@ readme:
 test: modules
 	./tools/test
 
-.PHONY: modules all cov hooks lint test
+.PHONY: modules all cover hooks lint test
