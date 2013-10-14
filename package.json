@@ -32,6 +32,6 @@
     "scripts": {
         "test": "./tools/test"
     },
-    "version": "0.1.4",
+    "version": "0.1.5",
     "readme": "de [![Build Status](https://travis-ci.org/golyshevd/Model.png?branch=master)](https://travis-ci.org/golyshevd/Model)\n==========\n\nSimple asynchronous promise based data engine\n"
 }
