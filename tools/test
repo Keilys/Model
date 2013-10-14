@@ -11,13 +11,13 @@ Path = require('path');
 Nodeunit = require('nodeunit');
 tests = Fs.readdirSync('test');
 
-tests = tests.filter(function (fileName) {
+tests = tests.map(function (fileName) {
 
-    return Fs.statSync( Path.join('test', fileName) ).isFile();
-}).map(function (fileName) {
+    return Path.join('test', fileName);
+}).filter(function (fileName) {
 
-        return Path.join('test', fileName);
-    });
+    return Fs.statSync(fileName).isFile();
+});
 
 Nodeunit.reporters.default.run(tests, null, function (error) {
     process.exit( +!!error );
