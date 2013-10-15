@@ -4,7 +4,7 @@ var DataEngine;
 var EventEmitter;
 
 DataEngine = require('../');
-EventEmitter = require('../src/lib/EventEmitter');
+EventEmitter = require('events').EventEmitter;
 
 module.exports = {
 

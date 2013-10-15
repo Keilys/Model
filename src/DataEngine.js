@@ -15,7 +15,7 @@ var Promise;
 
 var hasProperty;
 
-EventEmitter = require('./lib/EventEmitter');
+EventEmitter = require('events').EventEmitter;
 Exception = require('./Exception');
 Namespace = require('./lib/Namespace');
 Promise = require('./util/Promise');
