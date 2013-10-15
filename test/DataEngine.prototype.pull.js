@@ -157,7 +157,7 @@ module.exports = {
         });
     },
 
-    'Callback should be called in ctx passed as 3rd argument': function (test) {
+    'Callback should be called': function (test) {
 
         var ctx;
         var de;
@@ -170,21 +170,6 @@ module.exports = {
             test.strictEqual(this, ctx);
             test.done();
         }, ctx), void 0);
-    },
-
-    'Callback should be called in ctx passed as 2nd argument': function (test) {
-
-        var ctx;
-        var de;
-
-        ctx = {};
-
-        de = new DataEngine();
-
-        test.strictEqual(de.pull([], ctx, function fn () {
-            test.strictEqual(this, ctx);
-            test.done();
-        }), void 0);
     },
 
     'Should return promise': function (test) {

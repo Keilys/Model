@@ -115,22 +115,13 @@ DataEngine.prototype = {
      * */
     pull: function (provs, fn, ctx) {
 
-        var helper;
-
         if ( !Array.isArray(provs) ) {
             provs = [provs];
         }
 
         if ( 'function' !== typeof fn ) {
 
-            if ( 3 > arguments.length ) {
-
-                return this.__pull__(provs, fn, {});
-            }
-
-            helper = ctx;
-            ctx = fn;
-            fn = helper;
+            return this.__pull__(provs, fn, {});
         }
 
         this.__pull__(provs, ctx, {}).done(function (value) {
