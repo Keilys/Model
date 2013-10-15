@@ -15,10 +15,10 @@ var Promise;
 
 var hasProperty;
 
-EventEmitter = require('events').EventEmitter;
-Exception = require('./Exception');
-Namespace = require('./util/Namespace');
-Promise = require('./util/Promise');
+EventEmitter = /** @type EventEmitter */ require('events').EventEmitter;
+Exception = /** @type Exception */ require('./Exception');
+Namespace = /** @type Namespace */ require('./util/Namespace');
+Promise = /** @type Promise */ require('./util/Promise');
 
 hasProperty = Object.prototype.hasOwnProperty;
 
@@ -111,7 +111,7 @@ DataEngine.prototype = {
      * @param {*} fn
      * @param {*} [ctx]
      *
-     * @returns {void|JSPromise}
+     * @returns {void|Promise}
      * */
     pull: function (provs, fn, ctx) {
 
@@ -151,7 +151,7 @@ DataEngine.prototype = {
      * @param {*} ctx
      * @param {Object} cache
      *
-     * @returns {Promise.create()}
+     * @returns {Promise}
      * */
     __pull__: function (provs, ctx, cache) {
 
@@ -184,7 +184,9 @@ DataEngine.prototype = {
             promises[id] = promise;
         }
 
-        return Promise.allResolved(promises).then(function (promises) {
+        promise = Promise.allResolved(promises);
+
+        return /** @type {Promise} */ promise.then(function (promises) {
 
             var id;
             var promise;
@@ -235,7 +237,7 @@ DataEngine.prototype = {
      * @param {*} ctx
      * @param {Object} cache
      *
-     * @returns {Promise.create()}
+     * @returns {Promise}
      * */
     __invoke__: function (id, ctx, cache) {
 
