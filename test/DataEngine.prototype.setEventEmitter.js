@@ -66,6 +66,40 @@ module.exports = {
             test.ok(ex instanceof TypeError);
             test.done();
         }
+    },
+
+    'Exception should be thrown asynchronously': function (test) {
+
+        var de;
+        var ee;
+
+        ee = new EventEmitter();
+
+        ee.on(DataEngine.events.DATA_ACCEPTED, function () {
+
+            throw 42;
+        });
+
+        de = new DataEngine();
+
+        de.setEventEmitter(ee);
+
+        de.decl('result', function () {
+
+            return 'result';
+        });
+
+        de.pull(['result'], function () {
+
+            //  should not be called
+            test.ok(false);
+            test.done();
+        });
+
+        process.on('uncaughtException', function (ex) {
+            test.strictEqual(ex, 42);
+            test.done();
+        });
     }
 
 };

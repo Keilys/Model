@@ -264,7 +264,7 @@ DataEngine.prototype = {
 
         cache[id] = promise;
 
-        promise.then(function (value) {
+        promise.done(function (value) {
             de.__emitter__.emit(DataEngine.events.DATA_ACCEPTED, id, value);
         }, function (reason) {
             de.__emitter__.emit(DataEngine.events.DATA_REJECTED, id, reason);
