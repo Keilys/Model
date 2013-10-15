@@ -15,10 +15,10 @@ var Promise;
 
 var hasProperty;
 
-EventEmitter = /** @type EventEmitter */ require('./lib/EventEmitter');
-Exception = /** @type Exception */ require('./Exception');
-Namespace = /** @type Namespace */ require('./lib/Namespace');
-Promise = require('./util/promise');
+EventEmitter = require('./lib/EventEmitter');
+Exception = require('./Exception');
+Namespace = require('./lib/Namespace');
+Promise = require('./util/Promise');
 
 hasProperty = Object.prototype.hasOwnProperty;
 
