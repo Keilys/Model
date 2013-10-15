@@ -111,7 +111,7 @@ DataEngine.prototype = {
      * @param {*} fn
      * @param {*} [ctx]
      *
-     * @returns {void|Promise}
+     * @returns {void}
      * */
     pull: function (provs, fn, ctx) {
 
@@ -119,18 +119,11 @@ DataEngine.prototype = {
             provs = [provs];
         }
 
-        if ( 'function' === typeof fn ) {
-
-            this.__pull__(provs, ctx, {}).done(function (value) {
-                fn.call(ctx, null, value.result, value.errors);
-            }, function (reason) {
-                fn.call(ctx, reason, null, null);
-            });
-
-            return void 0;
-        }
-
-        return this.__pull__(provs, fn, {});
+        this.__pull__(provs, ctx, {}).done(function (value) {
+            fn.call(ctx, null, value.result, value.errors);
+        }, function (reason) {
+            fn.call(ctx, reason, null, null);
+        });
     },
 
     /**

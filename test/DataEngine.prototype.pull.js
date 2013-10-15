@@ -170,29 +170,5 @@ module.exports = {
             test.strictEqual(this, ctx);
             test.done();
         }, ctx), void 0);
-    },
-
-    'Should return promise': function (test) {
-
-        var ctx;
-        var de;
-        var res;
-
-        ctx = {};
-
-        de = new DataEngine();
-
-        res = de.pull([], ctx);
-
-        res.then(function (value) {
-            test.deepEqual(value, {
-                result: {},
-                errors: {}
-            });
-
-            test.done();
-        });
-
-        test.ok(res instanceof JSPromise);
     }
 };
