@@ -17,7 +17,7 @@ var hasProperty;
 
 EventEmitter = require('events').EventEmitter;
 Exception = require('./Exception');
-Namespace = require('./lib/Namespace');
+Namespace = require('./util/Namespace');
 Promise = require('./util/Promise');
 
 hasProperty = Object.prototype.hasOwnProperty;
