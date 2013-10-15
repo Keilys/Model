@@ -7,7 +7,7 @@ var Url;
 
 Exception = require('../Exception');
 DataEngine = require('../');
-JSPromise = require('../src/lib/JSPromise');
+JSPromise = require('../src/util/Promise');
 Url = require('url');
 
 Object.prototype.bug = 42;
