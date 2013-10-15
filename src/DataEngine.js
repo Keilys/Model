@@ -13,10 +13,14 @@ var Exception;
 var Namespace;
 var Promise;
 
+var hasProperty;
+
 EventEmitter = /** @type EventEmitter */ require('./lib/EventEmitter');
 Exception = /** @type Exception */ require('./Exception');
 Namespace = /** @type Namespace */ require('./lib/Namespace');
 Promise = require('./util/promise');
+
+hasProperty = Object.prototype.hasOwnProperty;
 
 /**
  * @constructor
@@ -152,7 +156,6 @@ DataEngine.prototype = {
     __pull__: function (provs, ctx, cache) {
 
         var de;
-        var hasProperty;
         var i;
         var id;
         var l;
@@ -160,7 +163,6 @@ DataEngine.prototype = {
         var promises;
 
         de = this;
-        hasProperty = Object.prototype.hasOwnProperty;
         promises = {};
 
         for ( i = 0, l = provs.length; i < l; i += 1) {
@@ -309,10 +311,7 @@ DataEngine.prototype = {
     __link__: function (value, ns, root) {
 
         var exists;
-        var hasProperty;
         var i;
-
-        hasProperty = Object.prototype.hasOwnProperty;
 
         if ( hasProperty.call(this.__alias__, ns) ) {
             ns = this.__alias__[ns];
