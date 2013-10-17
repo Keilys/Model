@@ -11,8 +11,8 @@
 var Runtime;
 var StdIO;
 
-Runtime = require('./Runtime');
-StdIO = require('./StdIO');
+Runtime = /** @type Runtime */ require('./Runtime');
+StdIO = /** @type StdIO */ require('./StdIO');
 
 /**
  * @constructor
@@ -43,24 +43,38 @@ Controller.prototype = {
      *
      * @param {Array<String>|String} provs
      * @param {*} onResolved
+     * @param {*} [context]
      *
      * @returns {void}
      * */
-    pull: function (provs, onResolved) {
+    pull: function (provs, onResolved, context) {
 
+        var i;
+        var params;
         var runtime;
 
-        runtime = new this.Runtime({
+        params = {
             io: this.io
-        });
+        };
+
+        for ( i in context ) {
+
+            if ( Object.prototype.hasOwnProperty.call(context, i) ) {
+                params[i] = context[i];
+            }
+        }
+
+        runtime = new this.Runtime(params);
 
         if ( runtime instanceof Runtime ) {
 
-            return runtime.resolve(provs).done(function (value) {
+            runtime.resolve(provs).done(function (value) {
                 onResolved.call(runtime, null, value.result, value.errors);
             }, function (reason) {
                 onResolved.call(runtime, reason, null, null);
             });
+
+            return;
         }
 
         throw new TypeError(runtime);

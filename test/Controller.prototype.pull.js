@@ -1,12 +1,11 @@
 'use strict';
 
 var AbstractController;
-var Controller;
 var Exception;
 var Runtime;
 var StdIO;
 
-AbstractController = require('../DataEngine');
+AbstractController = /** @type Controller */ require('../DataEngine');
 Exception = require('../Exception');
 Runtime = require('../Runtime');
 StdIO = require('../StdIO');
