@@ -2,11 +2,11 @@
 
 var Exception;
 var Runtime;
-var StdIO;
+var RuntimeIO;
 
 Exception = require('../Exception');
 Runtime = require('../Runtime');
-StdIO = require('../StdIO');
+RuntimeIO = require('../StdIO');
 
 Object.prototype.bug = 42;
 
@@ -17,7 +17,7 @@ module.exports = {
         var io;
         var runtime;
 
-        io = new StdIO();
+        io = new RuntimeIO();
 
         io.decl('r0', function (result, errors) {
             test.ok(this instanceof Runtime);
@@ -80,7 +80,7 @@ module.exports = {
         var io;
         var runtime;
 
-        io = new StdIO();
+        io = new RuntimeIO();
 
         io.decl('r0', function (result, errors) {
             test.ok(this instanceof Runtime);

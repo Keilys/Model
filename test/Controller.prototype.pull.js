@@ -3,12 +3,13 @@
 var AbstractController;
 var Exception;
 var Runtime;
-var StdIO;
+var RuntimeIO;
 
 AbstractController = /** @type Controller */ require('../Controller');
 Exception = require('../Exception');
 Runtime = require('../Runtime');
-StdIO = require('../StdIO');
+RuntimeIO = require('../StdIO');
+
 Object.prototype.bug = 42;
 
 function Controller () {

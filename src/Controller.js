@@ -9,37 +9,37 @@
 'use strict';
 
 var Runtime;
-var StdIO;
+var RuntimeIO;
 
 Runtime = /** @type Runtime */ require('./Runtime');
-StdIO = /** @type StdIO */ require('./StdIO');
+RuntimeIO = /** @type RuntimeIO */ require('./RuntimeIO');
 
 /**
  * @constructor
  * */
 function Controller () {
-    this.setIo( new StdIO() );
+    this.setIo( new RuntimeIO() );
 }
 
 Controller.prototype = {
 
     /**
      * @public
-     * @memberOf {StdIO}
+     * @memberOf {RuntimeIO}
      * @method
      *
-     * @param {StdIO} io
+     * @param {RuntimeIO} io
      *
      * @returns {Controller}
      * */
     setIo: function (io) {
 
-        if ( io instanceof StdIO ) {
+        if ( io instanceof RuntimeIO ) {
 
             /**
              * @public
              * @memberOf {Controller}
-             * @property {StdIO}
+             * @property {RuntimeIO}
              * */
             this.io = io;
 

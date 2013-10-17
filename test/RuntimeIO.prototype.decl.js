@@ -1,8 +1,8 @@
 'use strict';
 
-var StdIO;
+var RuntimeIO;
 
-StdIO = require('../StdIO');
+RuntimeIO = require('../StdIO');
 
 function provider () {}
 
@@ -12,9 +12,9 @@ module.exports = {
 
         var io;
 
-        io = new StdIO();
+        io = new RuntimeIO();
 
-        test.ok( io.decl('my', provider) instanceof StdIO );
+        test.ok( io.decl('my', provider) instanceof RuntimeIO );
 
         test.deepEqual({
             prov: {
@@ -35,9 +35,9 @@ module.exports = {
 
         var io;
 
-        io = new StdIO();
+        io = new RuntimeIO();
 
-        test.ok( io.decl('my', ['dep'], provider) instanceof StdIO );
+        test.ok( io.decl('my', ['dep'], provider) instanceof RuntimeIO );
 
         test.deepEqual({
             prov: {

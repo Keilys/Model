@@ -1,18 +1,18 @@
 'use strict';
 
-var StdIO;
+var RuntimeIO;
 
-StdIO = /** @type StdIO */ require('../StdIO');
+RuntimeIO = /** @type RuntimeIO */ require('../StdIO');
 
 module.exports = {
 
     'Convert undefined to array': function (test) {
-        test.deepEqual( StdIO.toArray(void 0), [] );
+        test.deepEqual( RuntimeIO.toArray(void 0), [] );
         test.done();
     },
 
     'Convert null to array': function (test) {
-        test.deepEqual(StdIO.toArray(null), []);
+        test.deepEqual(RuntimeIO.toArray(null), []);
         test.done();
     },
 
@@ -22,12 +22,12 @@ module.exports = {
 
         array = [];
 
-        test.strictEqual( StdIO.toArray(array), array );
+        test.strictEqual( RuntimeIO.toArray(array), array );
         test.done();
     },
 
     'Convert any other type to array': function (test) {
-        test.deepEqual( StdIO.toArray(5), [5]);
+        test.deepEqual( RuntimeIO.toArray(5), [5]);
         test.done();
     }
 

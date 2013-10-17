@@ -2,11 +2,11 @@
 
 var Exception;
 var Promise;
-var StdIO;
+var RuntimeIO;
 
 Exception = /** @type Exception */ require('./Exception');
 Promise = /** @type Promise */ require('./util/Promise');
-StdIO = /** @type StdIO */ require('./StdIO');
+RuntimeIO = /** @type RuntimeIO */ require('./RuntimeIO');
 
 /**
  * @constructor
@@ -14,30 +14,30 @@ StdIO = /** @type StdIO */ require('./StdIO');
 function Runtime (params) {
 
     var i;
-    
+
     /**
      * @private
      * @memberOf {Runtime}
      * @property {Object}
      * */
     this.__cache__ = {};
-    
+
     /**
      * @public
      * @memberOf {Runtime}
      * @property {Object}
      * */
     this.params = {};
-    
+
     for ( i in params ) {
-        
+
         if ( Object.prototype.hasOwnProperty.call(params, i) ) {
             this.params[i] = params[i];
         }
     }
 
-    if ( !(this.params.io instanceof StdIO) ) {
-        
+    if ( !(this.params.io instanceof RuntimeIO) ) {
+
         throw new TypeError(this.params.io);
     }
 }
@@ -68,7 +68,7 @@ Runtime.prototype = {
 
         promise = Promise.when(this.params.io.deps[id], function (deps) {
 
-            deps = StdIO.toArray(deps);
+            deps = RuntimeIO.toArray(deps);
 
             if ( 0 === deps.length ) {
 
@@ -84,9 +84,9 @@ Runtime.prototype = {
         io = this.params.io;
 
         promise.done(function (result) {
-            io.events.emit(StdIO.events.DATA_ACCEPTED, id, result);
+            io.events.emit(RuntimeIO.events.DATA_ACCEPTED, id, result);
         }, function (reason) {
-            io.events.emit(StdIO.events.DATA_REJECTED, id, reason);
+            io.events.emit(RuntimeIO.events.DATA_REJECTED, id, reason);
         });
 
         this.__cache__[id] = promise;
@@ -140,7 +140,7 @@ Runtime.prototype = {
         io = this.params.io;
         promises = {};
 
-        ids = StdIO.toArray(ids);
+        ids = RuntimeIO.toArray(ids);
 
         for ( i = 0, l = ids.length; i < l; i += 1 ) {
             id = ids[i];

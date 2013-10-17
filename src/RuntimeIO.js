@@ -9,49 +9,49 @@ Namespace = /** @type Namespace */ require('./util/Namespace');
 /**
  * @constructor
  * */
-function StdIO () {
+function RuntimeIO () {
 
     /**
      * @public
-     * @memberOf {StdIO}
+     * @memberOf {RuntimeIO}
      * @property {Object}
      * */
     this.aliases = {};
 
     /**
      * @public
-     * @memberOf {StdIO}
+     * @memberOf {RuntimeIO}
      * @property {EventEmitter}
      * */
     this.events = new EventEmitter();
 
     /**
      * @public
-     * @memberOf {StdIO}
+     * @memberOf {RuntimeIO}
      * @property {Object}
      * */
     this.deps = {};
 
     /**
      * @public
-     * @memberOf {StdIO}
+     * @memberOf {RuntimeIO}
      * @property {Object}
      * */
     this.prov = {};
 }
 
-StdIO.prototype = {
+RuntimeIO.prototype = {
 
     /**
      * @public
-     * @memberOf {StdIO}
+     * @memberOf {RuntimeIO}
      * @method
      *
      * @param {String} id
      * @param {String|String[]|*} [deps]
      * @param {*} [prov]
      *
-     * @returns {StdIO}
+     * @returns {RuntimeIO}
      * */
     decl: function (id, deps, prov) {
 
@@ -64,21 +64,21 @@ StdIO.prototype = {
         }
 
         this.prov[id] = prov;
-        this.deps[id] = StdIO.toArray(deps);
+        this.deps[id] = RuntimeIO.toArray(deps);
 
         return this;
     },
 
     /**
      * @public
-     * @memberOf {StdIO}
+     * @memberOf {RuntimeIO}
      * @method
      *
      * @param {*} value
      * @param {String} id
      * @param {Object} root
      *
-     * @returns {StdIO}
+     * @returns {RuntimeIO}
      * */
     link: function (value, id, root) {
 
@@ -114,13 +114,13 @@ StdIO.prototype = {
 /**
  * @public
  * @static
- * @memberOf StdIO
+ * @memberOf RuntimeIO
  *
  * @param {*} elem
  *
  * @returns {Array}
  * */
-StdIO.toArray = function (elem) {
+RuntimeIO.toArray = function (elem) {
 
     if ( void 0 === elem || null === elem ) {
 
@@ -138,15 +138,15 @@ StdIO.toArray = function (elem) {
 /**
  * @public
  * @static
- * @memberOf StdIO
+ * @memberOf RuntimeIO
  * @property {Object}
  * */
-StdIO.events = {
+RuntimeIO.events = {
 
     /**
      * @public
      * @static
-     * @memberOf StdIO.events
+     * @memberOf RuntimeIO.events
      * @property {String}
      * */
     DATA_ACCEPTED: 'accepted',
@@ -154,10 +154,10 @@ StdIO.events = {
     /**
      * @public
      * @static
-     * @memberOf StdIO.events
+     * @memberOf RuntimeIO.events
      * @property {String}
      * */
     DATA_REJECTED: 'rejected'
 };
 
-module.exports = StdIO;
+module.exports = RuntimeIO;

@@ -1,8 +1,8 @@
 'use strict';
 
-var StdIO;
+var RuntimeIO;
 
-StdIO = require('../StdIO');
+RuntimeIO = require('../StdIO');
 
 Object.prototype.bug = 42;
 
@@ -13,13 +13,13 @@ module.exports = {
         var io;
         var value;
 
-        io = new StdIO();
+        io = new RuntimeIO();
 
         io.aliases._a_ = 'a';
 
         value = {};
 
-        test.ok( io.link(5, '_a_', value) instanceof StdIO );
+        test.ok( io.link(5, '_a_', value) instanceof RuntimeIO );
 
         test.deepEqual(value, {
             a: 5
@@ -33,7 +33,7 @@ module.exports = {
         var io;
         var value;
 
-        io = new StdIO();
+        io = new RuntimeIO();
 
         value = {
             a: {
@@ -43,7 +43,7 @@ module.exports = {
 
         test.ok( io.link({
             c: 42
-        }, 'a', value) instanceof StdIO );
+        }, 'a', value) instanceof RuntimeIO );
 
         test.deepEqual(value, {
             a: {
