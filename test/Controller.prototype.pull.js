@@ -36,7 +36,7 @@ module.exports = {
         var runtime;
 
         controller = new Controller();
-        runtime = new Runtime();
+
         io = new StdIO();
 
         io.decl('ex', function () {
@@ -44,7 +44,10 @@ module.exports = {
             throw new Exception();
         });
 
-        runtime.setIo( io );
+        runtime = new Runtime({
+            io: io
+        });
+
         controller.setRuntime( runtime );
 
         controller.pull('ex', function (ex, result, errors) {

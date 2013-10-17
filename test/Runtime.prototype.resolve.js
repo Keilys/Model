@@ -59,8 +59,9 @@ module.exports = {
             throw 1;
         });
 
-        runtime = new Runtime();
-        runtime.setIo(io);
+        runtime = new Runtime({
+            io: io
+        });
 
         runtime.resolve(['e1', 'r1', 'non-existing']).then(function (value) {
             test.deepEqual(value.result, {
@@ -121,8 +122,9 @@ module.exports = {
             throw 1;
         });
 
-        runtime = new Runtime();
-        runtime.setIo(io);
+        runtime = new Runtime({
+            io: io
+        });
 
         runtime.resolve(['e1', 'r1', 'non-existing']).fail(function (reason) {
 

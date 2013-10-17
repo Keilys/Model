@@ -10,10 +10,12 @@ module.exports = {
 
         var runtime;
 
-        runtime = new Runtime();
 
         try {
-            runtime.setIo(5);
+
+            runtime = new Runtime({
+                io: 5
+            });
 
             throw 0;
         } catch (ex) {

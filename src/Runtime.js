@@ -11,47 +11,38 @@ StdIO = /** @type StdIO */ require('./StdIO');
 /**
  * @constructor
  * */
-function Runtime () {
+function Runtime (params) {
 
+    var i;
+    
     /**
      * @private
      * @memberOf {Runtime}
      * @property {Object}
      * */
     this.__cache__ = {};
-
-    this.setIo( new StdIO() );
-}
-
-Runtime.prototype = {
-
+    
     /**
      * @public
      * @memberOf {Runtime}
-     * @method
-     *
-     * @param {StdIO} io
-     *
-     * @returns {Runtime}
-     *
-     * @throws {TypeError}
-     *  */
-    setIo: function (io) {
-
-        if ( io instanceof StdIO ) {
-
-            /**
-             * @private
-             * @memberOf {Runtime}
-             * @property {StdIO}
-             * */
-            this.__io__ = io;
-
-            return this;
+     * @property {Object}
+     * */
+    this.params = {};
+    
+    for ( i in params ) {
+        
+        if ( Object.prototype.hasOwnProperty.call(params, i) ) {
+            this.params[i] = params[i];
         }
+    }
 
-        throw new TypeError(io);
-    },
+    if ( !(this.params.io instanceof StdIO) ) {
+        
+        throw new TypeError(this.params.io);
+    }
+}
+
+Runtime.prototype = {
 
     /**
      * @public
@@ -75,7 +66,7 @@ Runtime.prototype = {
 
         request = this;
 
-        promise = Promise.when(this.__io__.deps[id], function (deps) {
+        promise = Promise.when(this.params.io.deps[id], function (deps) {
 
             deps = StdIO.toArray(deps);
 
@@ -90,7 +81,7 @@ Runtime.prototype = {
             });
         });
 
-        io = this.__io__;
+        io = this.params.io;
 
         promise.done(function (result) {
             io.emitter.emit(StdIO.events.DATA_ACCEPTED, id, result);
@@ -118,7 +109,7 @@ Runtime.prototype = {
 
         var prov;
 
-        prov = this.__io__.prov[id];
+        prov = this.params.io.prov[id];
 
         if ( 'function' === typeof prov ) {
 
@@ -146,7 +137,7 @@ Runtime.prototype = {
         var promise;
         var promises;
 
-        io = this.__io__;
+        io = this.params.io;
         promises = {};
 
         ids = StdIO.toArray(ids);

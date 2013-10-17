@@ -9,14 +9,18 @@
 'use strict';
 
 var Runtime;
+var StdIO;
 
 Runtime = require('./Runtime');
+StdIO = require('./StdIO');
 
 /**
  * @constructor
  * */
 function Controller () {
-    this.setRuntime( new Runtime() );
+    this.setRuntime( new Runtime({
+        io: new StdIO()
+    }) );
 }
 
 Controller.prototype = {

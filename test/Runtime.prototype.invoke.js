@@ -24,8 +24,9 @@ module.exports = {
             return 0;
         });
 
-        runtime = new Runtime();
-        runtime.setIo(io);
+        runtime = new Runtime({
+            io: io
+        });
 
         runtime.invoke('r0').then(function (result) {
             test.strictEqual(result, 0);
@@ -65,8 +66,9 @@ module.exports = {
             throw 0;
         });
 
-        runtime = new Runtime();
-        runtime.setIo(io);
+        runtime = new Runtime({
+            io: io
+        });
 
         runtime.invoke('e0').fail(function (reason) {
             test.strictEqual(reason, 0);
@@ -90,8 +92,9 @@ module.exports = {
 
         io.decl('config', 42);
 
-        runtime = new Runtime();
-        runtime.setIo(io);
+        runtime = new Runtime({
+            io: io
+        });
 
         runtime.invoke('config');
 
