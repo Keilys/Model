@@ -9,6 +9,7 @@ AbstractController = /** @type Controller */ require('../DataEngine');
 Exception = require('../Exception');
 Runtime = require('../Runtime');
 StdIO = require('../StdIO');
+Object.prototype.bug = 42;
 
 function Controller () {
     AbstractController.apply(this, arguments);
@@ -26,11 +27,15 @@ module.exports = {
         controller = new Controller();
 
         controller.pull([], function (ex, result, errors) {
+            test.ok( this instanceof Runtime );
+            test.strictEqual(this.params.myParam, 42);
             test.strictEqual(ex, null);
             test.deepEqual(result, {});
             test.deepEqual(errors, {});
 
             test.done();
+        }, {
+            myParam: 42
         });
 
     },
