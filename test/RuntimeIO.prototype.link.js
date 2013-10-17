@@ -2,7 +2,7 @@
 
 var RuntimeIO;
 
-RuntimeIO = require('../StdIO');
+RuntimeIO = require('../RuntimeIO');
 
 Object.prototype.bug = 42;
 

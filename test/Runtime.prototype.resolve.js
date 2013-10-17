@@ -6,7 +6,7 @@ var RuntimeIO;
 
 Exception = require('../Exception');
 Runtime = require('../Runtime');
-RuntimeIO = require('../StdIO');
+RuntimeIO = require('../RuntimeIO');
 
 Object.prototype.bug = 42;
 

@@ -4,7 +4,7 @@ var Runtime;
 var StdIO;
 
 Runtime = require('../Runtime');
-StdIO = /** @type RuntimeIO */ require('../StdIO');
+StdIO = /** @type RuntimeIO */ require('../RuntimeIO');
 
 module.exports = {
 
