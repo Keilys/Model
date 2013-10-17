@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./src/DataEngine');
+module.exports = require('./src/Controller');
