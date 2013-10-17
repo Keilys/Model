@@ -21,6 +21,13 @@ function StdIO () {
     /**
      * @public
      * @memberOf {StdIO}
+     * @property {EventEmitter}
+     * */
+    this.emitter = new EventEmitter();
+
+    /**
+     * @public
+     * @memberOf {StdIO}
      * @property {Object}
      * */
     this.deps = {};
@@ -31,13 +38,6 @@ function StdIO () {
      * @property {Object}
      * */
     this.prov = {};
-
-    /**
-     * @public
-     * @memberOf {StdIO}
-     * @property {EventEmitter}
-     * */
-    this.emitter = new EventEmitter();
 }
 
 StdIO.prototype = {
