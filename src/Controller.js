@@ -18,16 +18,36 @@ StdIO = /** @type StdIO */ require('./StdIO');
  * @constructor
  * */
 function Controller () {
-
-    /**
-     * @public
-     * @memberOf {Controller}
-     * @property {StdIO}
-     * */
-    this.io = new StdIO();
+    this.setIo( new StdIO() );
 }
 
 Controller.prototype = {
+
+    /**
+     * @public
+     * @memberOf {StdIO}
+     * @method
+     *
+     * @param {StdIO} io
+     *
+     * @returns {Controller}
+     * */
+    setIo: function (io) {
+
+        if ( io instanceof StdIO ) {
+
+            /**
+             * @public
+             * @memberOf {Controller}
+             * @property {StdIO}
+             * */
+            this.io = io;
+
+            return this;
+        }
+
+        throw new TypeError(io);
+    },
 
     /**
      * @public
