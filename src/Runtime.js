@@ -84,9 +84,9 @@ Runtime.prototype = {
         io = this.params.io;
 
         promise.done(function (result) {
-            io.emitter.emit(StdIO.events.DATA_ACCEPTED, id, result);
+            io.events.emit(StdIO.events.DATA_ACCEPTED, id, result);
         }, function (reason) {
-            io.emitter.emit(StdIO.events.DATA_REJECTED, id, reason);
+            io.events.emit(StdIO.events.DATA_REJECTED, id, reason);
         });
 
         this.__cache__[id] = promise;

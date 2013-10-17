@@ -85,7 +85,7 @@ module.exports = {
         ex = new Error();
         io = new StdIO();
 
-        io.emitter.on( StdIO.events.DATA_ACCEPTED, function () {
+        io.events.on( StdIO.events.DATA_ACCEPTED, function () {
 
             throw ex;
         });

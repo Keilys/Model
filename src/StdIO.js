@@ -23,7 +23,7 @@ function StdIO () {
      * @memberOf {StdIO}
      * @property {EventEmitter}
      * */
-    this.emitter = new EventEmitter();
+    this.events = new EventEmitter();
 
     /**
      * @public
