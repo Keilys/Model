@@ -2,7 +2,7 @@
 
 var Controller;
 
-Controller = require('../DataEngine');
+Controller = require('../Controller');
 
 module.exports = {
 

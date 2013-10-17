@@ -5,7 +5,7 @@ var Exception;
 var Runtime;
 var StdIO;
 
-AbstractController = /** @type Controller */ require('../DataEngine');
+AbstractController = /** @type Controller */ require('../Controller');
 Exception = require('../Exception');
 Runtime = require('../Runtime');
 StdIO = require('../StdIO');
