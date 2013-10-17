@@ -18,9 +18,13 @@ StdIO = require('./StdIO');
  * @constructor
  * */
 function Controller () {
-    this.setRuntime( new Runtime({
-        io: new StdIO()
-    }) );
+
+    /**
+     * @public
+     * @memberOf {Controller}
+     * @property {StdIO}
+     * */
+    this.io = new StdIO();
 }
 
 Controller.prototype = {
@@ -28,28 +32,9 @@ Controller.prototype = {
     /**
      * @public
      * @memberOf {Controller}
-     * @method
-     *
-     * @param {Runtime} runtime
-     *
-     * @returns {Controller}
+     * @constructor
      * */
-    setRuntime: function (runtime) {
-
-        if ( runtime instanceof Runtime ) {
-
-            /**
-             * @private
-             * @memberOf {Controller}
-             * @property {Runtime}
-             * */
-            this.__context__ = runtime;
-
-            return this;
-        }
-
-        throw new TypeError(runtime);
-    },
+    Runtime: Runtime,
 
     /**
      * @public
@@ -63,15 +48,22 @@ Controller.prototype = {
      * */
     pull: function (provs, onResolved) {
 
-        var context;
+        var runtime;
 
-        context = this.__context__;
-
-        context.resolve(provs).done(function (value) {
-            onResolved.call(context, null, value.result, value.errors);
-        }, function (reason) {
-            onResolved.call(context, reason, null, null);
+        runtime = new this.Runtime({
+            io: this.io
         });
+
+        if ( runtime instanceof Runtime ) {
+
+            return runtime.resolve(provs).done(function (value) {
+                onResolved.call(runtime, null, value.result, value.errors);
+            }, function (reason) {
+                onResolved.call(runtime, reason, null, null);
+            });
+        }
+
+        throw new TypeError(runtime);
     }
 
 };

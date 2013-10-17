@@ -1,14 +1,22 @@
 'use strict';
 
+var AbstractController;
 var Controller;
 var Exception;
 var Runtime;
 var StdIO;
 
-Controller = require('../DataEngine');
+AbstractController = require('../DataEngine');
 Exception = require('../Exception');
 Runtime = require('../Runtime');
 StdIO = require('../StdIO');
+
+function Controller () {
+    AbstractController.apply(this, arguments);
+}
+
+Controller.prototype = Object.create(AbstractController.prototype);
+Controller.prototype.Runtime = Runtime;
 
 module.exports = {
 
@@ -19,7 +27,6 @@ module.exports = {
         controller = new Controller();
 
         controller.pull([], function (ex, result, errors) {
-
             test.strictEqual(ex, null);
             test.deepEqual(result, {});
             test.deepEqual(errors, {});
@@ -32,26 +39,15 @@ module.exports = {
     'Should be called with error': function (test) {
 
         var controller;
-        var io;
-        var runtime;
 
         controller = new Controller();
 
-        io = new StdIO();
-
-        io.decl('ex', function () {
+        controller.io.decl('ex', function () {
 
             throw new Exception();
         });
 
-        runtime = new Runtime({
-            io: io
-        });
-
-        controller.setRuntime( runtime );
-
         controller.pull('ex', function (ex, result, errors) {
-
             test.ok(ex instanceof Exception);
             test.deepEqual(result, null);
             test.deepEqual(errors, null);
@@ -75,6 +71,26 @@ module.exports = {
             test.strictEqual(ex, 42);
             test.done();
         });
+    },
+
+    'Should throw a TypeError': function (test) {
+
+        var controller;
+
+        controller = new Controller();
+
+        controller.Runtime = function () {};
+
+        try {
+            controller.pull([], function () {});
+
+            throw 0;
+        } catch (ex) {
+
+            test.ok( ex instanceof TypeError );
+        }
+
+        test.done();
     }
 
 };
