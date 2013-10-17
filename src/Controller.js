@@ -4,7 +4,7 @@
  * Copyright (c) 2013 Golyshev Dmitrii (golyshev.dmitry@yandex.ru)
  *
  * @license MIT
- * @version 0.1.5
+ * @version 1.0.0
  * */
 'use strict';
 
