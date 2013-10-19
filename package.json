@@ -13,7 +13,7 @@
         }
     ],
     "dependencies": {
-        "jspromise": "~0.2.8",
+        "jspromise": "git://github.com/golyshevd/JSPromise.git#v1.0.0",
         "node-ns": "~1.0.0"
     },
     "description": "Simple asynchronous promise-based controller",
