@@ -14,7 +14,7 @@
     ],
     "dependencies": {
         "jspromise": "git://github.com/golyshevd/JSPromise.git#v1.0.0",
-        "node-ns": "~1.0.0"
+        "node-ns": "git://github.com/golyshevd/Namespace.git#v1.0.0"
     },
     "description": "Simple asynchronous promise-based controller",
     "devDependencies": {
